@@ -55,15 +55,15 @@ NVS nv;
 #endif
 
 #if COMMAND_SERVER == PERSISTENT || COMMAND_SERVER == BOTH
-  CmdServer persistentCmdSvr1(9996, 10L*1000L, true);
+  CmdServer persistentCmdSvr1(COMMAND_SERVER1_PORT, COMMAND_SERVER_PERSISTENT_TIMEOUT, true);
   #if OPERATIONAL_MODE != ETHERNET_W5100
-    CmdServer persistentCmdSvr2(9997, 10L*1000L, true);
+    CmdServer persistentCmdSvr2(COMMAND_SERVER2_PORT, COMMAND_SERVER_PERSISTENT_TIMEOUT, true);
   #endif
-  CmdServer persistentCmdSvr3(9998, 10L*1000L, true);
+  CmdServer persistentCmdSvr3(COMMAND_SERVER3_PORT, COMMAND_SERVER_PERSISTENT_TIMEOUT, true);
 #endif
 
 #if COMMAND_SERVER == STANDARD || COMMAND_SERVER == BOTH
-  CmdServer cmdSvr(9999, 1L*1000L);
+  CmdServer cmdSvr(COMMAND_SERVER_PORT, COMMAND_SERVER_TIMEOUT);
 #endif
 
 void systemServices() {

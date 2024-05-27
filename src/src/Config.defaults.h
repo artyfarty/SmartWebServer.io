@@ -36,6 +36,31 @@
 // command server channels
 #define COMMAND_SERVER               BOTH     // BOTH, for STANDARD (port 9999) and PERSISTENT (ports 9996 to 9998)
                                               // or disable with OFF
+
+#ifndef COMMAND_SERVER_PORT
+#define COMMAND_SERVER_PORT             9999
+#endif
+
+#ifndef COMMAND_SERVER1_PORT
+#define COMMAND_SERVER1_PORT            9996
+#endif
+
+#ifndef COMMAND_SERVER2_PORT
+#define COMMAND_SERVER2_PORT            9997
+#endif
+
+#ifndef COMMAND_SERVER3_PORT
+#define COMMAND_SERVER3_PORT            9998
+#endif
+
+#ifndef COMMAND_SERVER_TIMEOUT
+#define COMMAND_SERVER_TIMEOUT         1L*1000L
+#endif
+
+#ifndef COMMAND_SERVER_PERSISTENT_TIMEOUT
+#define COMMAND_SERVER_PERSISTENT_TIMEOUT         10L*1000L
+#endif
+
 // wifi related
 #if OPERATIONAL_MODE == WIFI
 #ifndef MDNS_SERVER

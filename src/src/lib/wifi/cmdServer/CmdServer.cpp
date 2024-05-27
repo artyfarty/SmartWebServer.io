@@ -18,15 +18,20 @@
     cmdSvr->setNoDelay(true);
   }
 
+  void CmdServer::restart() {
+    if (cmdSvrClient) cmdSvrClient.abort();
+    cmdSvr->begin();
+  }
+
   void CmdServer::handleClient() {
     // disconnect client
-    if (cmdSvrClient && !cmdSvrClient.connected()) cmdSvrClient.stop();
-    if (cmdSvrClient && (long)(clientEndTimeMs - millis()) < 0) cmdSvrClient.stop();
+    if (cmdSvrClient && !cmdSvrClient.connected()) cmdSvrClient.abort();
+    if (cmdSvrClient && (long)(clientEndTimeMs - millis()) < 0) cmdSvrClient.abort();
 
     // new client
     if (!cmdSvrClient && cmdSvr->hasClient()) {
       // find free/disconnected spot
-      cmdSvrClient = cmdSvr->available();
+      cmdSvrClient = cmdSvr->accept();
       clientEndTimeMs = millis() + (unsigned long)clientTimeoutMs;
     }
 

@@ -9,6 +9,8 @@
 #include "AmbientTile.h"
 #include "StatusTile.h"
 #include "AxisTile.h"
+#include "ServiceTile.h"
+
 #if DISPLAY_SERVO_MONITOR == ON
   #include "ServoTile.h"
 #endif

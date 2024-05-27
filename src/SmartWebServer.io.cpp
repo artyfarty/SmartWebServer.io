@@ -42,13 +42,21 @@ NVS nv;
 #include "src/libApp/cmd/Cmd.h"
 #include "src/libApp/bleGamepad/BleGamepad.h"
 #include "src/libApp/encoders/Encoders.h"
-#include "src/pages/Pages.h"
-#include "src/libApp/status/Status.h"
 
 #include "src/lib/ethernet/cmdServer/CmdServer.h"
 #include "src/lib/ethernet/webServer/WebServer.h"
 #include "src/lib/wifi/cmdServer/CmdServer.h"
 #include "src/lib/wifi/webServer/WebServer.h"
+
+#if (COMMAND_SERVER == PERSISTENT || COMMAND_SERVER == BOTH) && DISPLAY_CS_RESTART == ON
+  extern CmdServer persistentCmdSvr1;
+  extern CmdServer persistentCmdSvr2;
+  extern CmdServer persistentCmdSvr3;
+#endif
+
+#include "src/pages/Pages.h"
+#include "src/libApp/status/Status.h"
+
 
 #if DEBUG == PROFILER
   extern void profiler();

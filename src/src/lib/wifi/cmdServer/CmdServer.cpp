@@ -25,8 +25,8 @@
 
   void CmdServer::handleClient() {
     // disconnect client
-    if (cmdSvrClient && !cmdSvrClient.connected()) cmdSvrClient.abort();
-    if (cmdSvrClient && (long)(clientEndTimeMs - millis()) < 0) cmdSvrClient.abort();
+    if (cmdSvrClient && !cmdSvrClient.connected()) cmdSvrClient.COMMAND_SERVER_STOP_TYPE();
+    if (cmdSvrClient && (long)(clientEndTimeMs - millis()) < 0) cmdSvrClient.COMMAND_SERVER_STOP_TYPE();
 
     // new client
     if (!cmdSvrClient && cmdSvr->hasClient()) {

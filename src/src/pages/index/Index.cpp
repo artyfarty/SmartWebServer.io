@@ -75,6 +75,10 @@ void handleRoot()
 
   data.concat(F("<br class=\"clear\" />\n"));
 
+  #if DISPLAY_SERVICE == ON
+  serviceTile(data);
+  #endif
+
   #if DISPLAY_SERVO_MONITOR == ON
     servoTile(data);
   #endif
@@ -178,6 +182,9 @@ void processIndexGet()
   #endif
   #if DISPLAY_SERVO_CALIBRATION == ON
     servoCalibrateTileGet();
+  #endif
+  #if DISPLAY_SERVICE == ON
+  serviceTileGet();
   #endif
 
   state.lastControllerPageLoadTime = millis();

@@ -61,6 +61,10 @@
 #define COMMAND_SERVER_PERSISTENT_TIMEOUT         10L*1000L
 #endif
 
+#ifndef COMMAND_SERVER_STOP_TYPE
+#define COMMAND_SERVER_STOP_TYPE         stop
+#endif
+
 // wifi related
 #if OPERATIONAL_MODE == WIFI
 #ifndef MDNS_SERVER
@@ -166,4 +170,12 @@
 
 #ifndef SERIAL_BAUD
 #define SERIAL_BAUD                115200
+#endif
+
+#ifndef DISPLAY_SERVICE
+#define DISPLAY_SERVICE                OFF
+#endif
+
+#ifndef DISPLAY_CS_RESTART
+#define DISPLAY_CS_RESTART                OFF
 #endif

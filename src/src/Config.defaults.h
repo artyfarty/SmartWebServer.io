@@ -172,10 +172,6 @@
 #define SERIAL_BAUD                115200
 #endif
 
-#ifndef DISPLAY_SERVICE
-#define DISPLAY_SERVICE                OFF
-#endif
-
-#ifndef DISPLAY_CS_RESTART
-#define DISPLAY_CS_RESTART                OFF
+#ifndef DISPLAY_SWS_RESTART
+#define DISPLAY_SWS_RESTART                OFF
 #endif

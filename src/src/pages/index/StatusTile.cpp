@@ -79,9 +79,21 @@ void statusTile(String &data)
     #if defined(BOOT0_PIN) && DISPLAY_RESET_CONTROLS == FWU
       data.concat(F(" &nbsp;&nbsp;<button onpointerdown=\"if (confirm('" L_ARE_YOU_SURE "?')) s('boot','fwu')\" type='button'>" L_RESET_FWU "!</button>"));
     #endif
+    #if DISPLAY_SWS_RESTART != OFF 
+      data.concat(F("<button onpointerdown=\"if (confirm('" L_ARE_YOU_SURE "?')) s('boot','reset_sws')\" type='button'>" L_RESET_SWS "!</button><br />"));
+    #endif
     data.concat(FPSTR(html_form_end));
     data.concat(F("<br/>\n"));
     data.concat(FPSTR(html_resetNotes));
+    www.sendContentAndClear(data);
+  #elif DISPLAY_SWS_RESTART != OFF 
+    if (mountType != 0) data.concat(F("<br /><hr>"));
+    sprintf_P(temp, html_form_begin, "index.htm");
+    data.concat(temp);
+    data.concat(L_RESET_TITLE "<br/><br/>");
+    data.concat(F("<button onpointerdown=\"if (confirm('" L_ARE_YOU_SURE "?')) s('boot','reset_sws')\" type='button'>" L_RESET_SWS "!</button><br />"));
+    data.concat(FPSTR(html_form_end));
+    data.concat(F("<br/>\n"));
     www.sendContentAndClear(data);
   #endif
 
@@ -187,7 +199,11 @@ void statusTileGet()
       }
     #endif
   #endif
-
+  #if DISPLAY_SWS_RESTART != OFF 
+    if (ssa.equals("reset_sws")) {
+      HAL_RESET();
+    }
+  #endif
   String ssm = www.arg("mountt");
   if (!ssm.equals(EmptyStr))
   {

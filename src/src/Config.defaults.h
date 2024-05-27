@@ -159,3 +159,11 @@
 #ifndef AS37_CLOCK_RATE_KHZ
 #define AS37_CLOCK_RATE_KHZ           4000    // error rate is: ~2.0% at 500 KHz, ~0.5% @ 2000 KHz, ~0.01% at 4000KHz
 #endif
+
+#ifndef SERIAL_BAUD_DEFAULT
+#define SERIAL_BAUD_DEFAULT          9600
+#endif
+
+#ifndef SERIAL_BAUD
+#define SERIAL_BAUD                115200
+#endif

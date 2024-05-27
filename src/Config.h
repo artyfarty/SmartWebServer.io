@@ -8,6 +8,11 @@
  *           *** Read the compiler warnings and errors, they are there to help guard against invalid configurations ***
 */
 
+// If you want to keep your config changes out of git, you can include an external copy of the file
+#if __has_include("Userconfig.h")
+    #include "Userconfig.h"
+#else 
+
 // ---------------------------------------------------------------------------------------------------------------------------------
 // ADJUST THE FOLLOWING TO CONFIGURE YOUR ADD-ON'S FEATURES ------------------------------------------------------------------------
 // <-Req'd = always must set, <-Often = usually must set, Option = optional, Adjust = adjust as req'd, Infreq = infrequently changed
@@ -64,6 +69,7 @@
 #define AXIS2_ENCODER_DIFF_LIMIT_TO   300 //    300, n, (arcsec.) Minimum diff. between encoder/OnStep for sync. to OnStep.   Adjust
 #define AXIS2_ENCODER_DIFF_LIMIT_FROM OFF //    OFF, n, (arcsec.) Maximum diff. between encoder/OnStep for sync. from OnStep. Adjust
                                           //         for absolute encoders.
+#endif
 
 // THAT'S IT FOR USER CONFIGURATION!
 // -------------------------------------------------------------------------------

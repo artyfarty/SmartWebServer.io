@@ -7,6 +7,11 @@
 // ADJUST THE FOLLOWING TO CONFIGURE YOUR CONTROLLER FEATURES ----------------------------------------------------------------------
 // <-Req'd = always must set, <-Often = usually must set, Option = optional, Adjust = adjust as req'd, Infreq = infrequently changed
 
+// If you want to keep your config changes out of git, you can include an external copy of the file
+#if __has_include("Extended.userconfig.h")
+    #include "Extended.userconfig.h"
+#else 
+
 // DEBUG ------------------------------------------------------------ see https://onstep.groups.io/g/main/wiki/6-Configuration#DEBUG
 // Enable additional debugging and/or status messages on the specified SERIAL_DEBUG port
 // Note that the SERIAL_DEBUG port cannot be used for normal communication with OnStep
@@ -66,4 +71,4 @@
 #define RESET_PIN                     OFF //         OFF, Specify a pin# used to reset OnStep.                                Infreq
 #define RESET_PIN_STATE               LOW //         OFF, Specify state of RESET_PIN pin otherwise OPEN when inactive.        Infreq
                                           //             
-                                          
+#endif

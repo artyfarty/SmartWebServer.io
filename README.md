@@ -1,3 +1,10 @@
+# This fork
+I migrarated the project to pio, added some build envsand features to suite my needs:
+* Automated upload via onstep board (untested)
+* Restart SWS button
+
+Currentlly i don't have any plans for long term support of this project.
+
 # OnStep Smart Web Server
 This is the WiFi and Ethernet web server for OnStep, it is also sometimes referred to as the "SWS".
 The SWS enables OnStep to be controlled from a website and/or by passing commands over IP.

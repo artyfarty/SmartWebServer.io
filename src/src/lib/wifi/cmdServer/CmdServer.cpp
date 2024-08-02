@@ -18,11 +18,6 @@
     cmdSvr->setNoDelay(true);
   }
 
-  void CmdServer::restart() {
-    if (cmdSvrClient) cmdSvrClient.abort();
-    cmdSvr->begin();
-  }
-
   void CmdServer::handleClient() {
     // disconnect client
     if (cmdSvrClient && !cmdSvrClient.connected()) cmdSvrClient.COMMAND_SERVER_STOP_TYPE();

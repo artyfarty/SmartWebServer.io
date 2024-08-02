@@ -11,7 +11,6 @@
       CmdServer(uint32_t port, long clientTimeoutMs, bool persist = false);
       void begin();
       void handleClient();
-      void restart();
 
     private:
       WiFiServer *cmdSvr;

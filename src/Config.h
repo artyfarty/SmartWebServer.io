@@ -24,15 +24,25 @@
 
 //      Parameter Name              Value   Default  Notes                                                                      Hint
 // OPERATIONAL MODE ----------------------------------------------------------------------------------------------------------------
+#ifndef OPERATIONAL_MODE
 #define OPERATIONAL_MODE             WIFI //   WIFI, Or use ETHERNET_W5100 or ETHERNET_W5500                                 <-Req'd
+#endif
 
 // SERIAL PORTS --------------------------------------------------------------------------------------------------------------------
+#ifndef SERIAL_BAUD_DEFAULT
 #define SERIAL_BAUD_DEFAULT          9600 //   9600, Common baud rates for this parameter are 9600,19200,57600,115200,etc.    Infreq
                                           //         The OnStep serial port this is wired to must use the same rate above.
+#endif
+
+#ifndef SERIAL_BAUD
 #define SERIAL_BAUD                115200 // 115200, Or use 19200,57600,115200,230400,460800 (not all devices support > 115200)
                                           //         (OnStep and here.)  Automatically uses 19200 if talking to a Mega2560 OnStep.
+#endif
+
+#ifndef SERIAL_SWAP
 #define SERIAL_SWAP                  AUTO //   AUTO, Automatic check both, ON for swapped port or OFF for default port only.  Infreq
                                           //         this option is ignored in ETHERNET modes
+#endif
 
 // STATUS LED ----------------------------------------------------------------------------------------------------------------------
 #define LED_STATUS                     ON //     ON, Enable LED flashes while connecting then steady once connected.          Infreq

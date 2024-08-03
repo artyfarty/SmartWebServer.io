@@ -23,7 +23,9 @@
 #endif
 
 // Default serial port where OnStep is attached ------------------------------------------------------
+#ifndef SERIAL_ONSTEP
 #define SERIAL_ONSTEP Serial1
+#endif
 
 // Non-volatile storage ------------------------------------------------------------------------------
 #if NV_DRIVER == NV_DEFAULT

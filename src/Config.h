@@ -1,28 +1,38 @@
-// ---------------------------------------------------------------------------------------------------------------------------------
-// Configuration for OnStep SmartWebServer Add-on
-
-/*
- *               For more information on setting this addon up see https://onstep.groups.io/g/main/wiki/7119 
- *                           and join the OnStep Groups.io at https://groups.io/g/onstep
+/* ---------------------------------------------------------------------------------------------------------------------------------
+ *                                       Configuration for the OnStep SmartWebServer
+ *
+ *           For more information on setting up the Smart Web Server see https://onstep.groups.io/g/main/wiki/7119
+ *                               and join the OnStep Groups.io at https://groups.io/g/onstep
  * 
- *           *** Read the compiler warnings and errors, they are there to help guard against invalid configurations ***
-*/
+ *         *** Read the compiler warnings and errors, they are there to help guard against invalid configurations ***
+ *
+ *      For Wifi successful startup an AP will appear with an default SSID of "ONSTEP" and default password of "password".
+ *      After connecting the web-site is at "192.168.0.1" and the cmd channels are at "192.168.0.1:9996 to 9999". If locked
+ *      out selecting "Erase Flash: All Flash Contents" from the Arduino IDE Tools menu before uploading/flashing again can
+ *      help restore access to the ESP8266 or ESP32; or see Extended.config.h to wipe NV.
+ *
+ *   For Ethernet DHCP and mDNS are active by default so OnStep can usually be reached at "onstepsws.local" or by checking your
+ *   LAN's Router or Access Point to see what IP Address was assigned.
+ *   You can also manually configure the SWS network settings and static IP in Extended.config.h so they match your LAN instead.
+ *
+ * ---------------------------------------------------------------------------------------------------------------------------------
+ * ADJUST THE FOLLOWING TO CONFIGURE YOUR CONTROLLER FEATURES ----------------------------------------------------------------------
+ *
+ * <-Req'd = always must set, <-Often = usually must set, Option = optional, Adjust = adjust as req'd, Infreq = infrequently changed
+ */
 
 // If you want to keep your config changes out of git, you can include an external copy of the file
 #if __has_include("Userconfig.h")
     #include "Userconfig.h"
-#else 
-
-// ---------------------------------------------------------------------------------------------------------------------------------
-// ADJUST THE FOLLOWING TO CONFIGURE YOUR ADD-ON'S FEATURES ------------------------------------------------------------------------
-// <-Req'd = always must set, <-Often = usually must set, Option = optional, Adjust = adjust as req'd, Infreq = infrequently changed
-
-// For Wifi successful startup an AP will appear with an default SSID of "ONSTEP" and default password of "password".
-// After connecting the web-site is at "192.168.0.1" and the cmd channels are at "192.168.0.1:9996 to 9999".
-// If locked out selecting "Erase Flash: All Flash Contents" from the Arduino IDE Tools menu before uploading/flashing again
-// can help restore access to the ESP8266 or ESP32; or see Extended.config.h to wipe NV.
+#else
 
 //      Parameter Name              Value   Default  Notes                                                                      Hint
+
+// =================================================================================================================================
+// CONTROLLER ======================================================================================================================
+
+#define HOST_NAME            "OnStep-SWS" // p-SWS", This devices name up to 16 chars (collapses to mDNS name "onstepsws".)   Adjust
+
 // OPERATIONAL MODE ----------------------------------------------------------------------------------------------------------------
 #ifndef OPERATIONAL_MODE
 #define OPERATIONAL_MODE             WIFI //   WIFI, Or use ETHERNET_W5100 or ETHERNET_W5500                                 <-Req'd
@@ -44,26 +54,32 @@
                                           //         this option is ignored in ETHERNET modes
 #endif
 
+// BLE GAMEPAD SETTINGS (ESP32 ONLY) ------------------------------------------------ see https://onstep.groups.io/g/main/wiki/26762
+#define BLE_GAMEPAD                   OFF //    OFF, ON to allow BLE gamepad connection for ESP32 only.                       Option
+#define BLE_GP_ADDR   "ff:ff:de:09:f5:cf" // f5:cf", GamePad MAC address #1                                                   Adjust
+                                          //         GamePad device address must match exactly else it will not connect!
+                                          //         Replace address with yours, in lower case, with colons as shown.
+#define BLE_GP_ADDR1  "ff:ff:ff:ff:ff:ff" // ff:ff", GamePad MAC address #2                                                   Adjust
+                                          //         Two GamePads are allowed, operating in a "handoff" mode, one at time.
+
 // STATUS LED ----------------------------------------------------------------------------------------------------------------------
 #define LED_STATUS                     ON //     ON, Enable LED flashes while connecting then steady once connected.          Infreq
-#define LED_STATUS_ON_STATE          HIGH
 
 // DISPLAY -------------------------------------------------------------------------------------------------------------------------
-#define DISPLAY_LANGUAGE             L_en //   L_en, English. Or L_ce, L_de, L_en, L_us, L_es two letter country code.        Adjust
-#define DISPLAY_WEATHER               OFF //    OFF, ON ambient conditions in locale default units.                           Option
+#define DISPLAY_LANGUAGE             L_en //   L_en, English. Or L_ca, L_cn, L_de, L_en, L_es, L_fr, L_it, L_jp, L_us.        Adjust
+                                          //         Two letter country code (see Locales.h for more information.)
+#define DISPLAY_WEATHER                ON //     ON, ON ambient conditions in locale default units.                           Option
 #define DISPLAY_INTERNAL_TEMPERATURE  OFF //    OFF, ON internal MCU temp. in locale default units.                           Option
-#define DISPLAY_WIFI_SIGNAL_STRENGTH   ON //     ON, Wireless signal strength reported via web interface. OFF otherwise.      Option
-#define DISPLAY_RESET_CONTROLS        OFF //    OFF, ON allows reset if supported, FWU for STM32 firmware upload pin HIGH.    Option
-
+#define DISPLAY_RESET_CONTROLS         ON //     ON, ON allows reset if supported, FWU for STM32 firmware upload pin HIGH.    Option
+#define DISPLAY_COORDINATE_ORIGIN     OFF //    OFF, ON to display the coordinate origin control tile on the mount page.      Option
 #define DISPLAY_SERVO_MONITOR         OFF //    OFF, ON to display the servo monitor for OnStepX (any axis.)                  Option
-#define DISPLAY_SERVO_ORIGIN_CONTROLS OFF //    OFF, ON to display control to set the absolute encoder origin for servos.     Option
 
 // ENCODER SUPPORT -----------------------------------------------------------------------------------------------------------------
 // Some of these settings are stored in NV (EEPROM) as the default values when first uploaded.  Later changes below may be
 // ignored unless NV is wiped or you configure to revert to the defaults again at runtime.
 #define ENC_AUTO_SYNC_DEFAULT          ON //     ON, Automatically sync Encoders to OnStep.                                   Option
 #define ENC_AUTO_SYNC_MEMORY          OFF //    OFF, ON Remember automatic sync setting across power cycles.                  Option
-#define ENC_SYNC_DURING_GOTO           ON //    OFF, ON high resolution encoders correct pointing even for gotos.             Option
+#define ENC_SYNC_DURING_GOTO          OFF //    OFF, ON high resolution encoders correct pointing even for gotos.             Option
 
 #define AXIS1_ENCODER                 OFF //    OFF, AB, AB_ESP32, CW_CCW, PULSE_DIR, AS37_H39B_B. RA/Azm (A/MA) & (B/SLO.)   Option
 #define AXIS1_ENCODER_TICKS_DEG  22.22222 // 22.222, n, (ticks/degree.) Encoder ticks per degree.                             Adjust

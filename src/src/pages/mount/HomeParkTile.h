@@ -12,7 +12,7 @@ extern void homeParkTileGet();
 
 // Homing
 const char html_homeReturn[] PROGMEM =
-"<button onpointerdown=\"g('qh')\" type='button'>" ARROW_DR HOME_CH " " L_FIND_HOME "</button>";
+"<button onpointerdown=\"g('qh')\" type='button'>" ARROW_DR HOME_CH " " L_RETURN_HOME "</button>";
 const char html_homeReset[] PROGMEM =
 "<button onpointerdown=\"if (confirm('" L_ARE_YOU_SURE "?')) g('qr')\" type='button'>" CAUTION_CH HOME_CH " " L_RESET_HOME "</button>";
 
@@ -31,9 +31,9 @@ const char html_homeAuto[] PROGMEM =
 
 // Home offset
 const char html_homeOffsetAxis1[] PROGMEM =
-  "<input style='width:6em;' value='%ld' type='number' name='hc1' min='-324000' max='324000'>&nbsp;" L_HOME_OFFSET_RANGE_AXIS1 "<br />\n";
+  "<input style='width:6em;' value='%ld' type='number' name='hc1' min='-" STR(HOME_OFFSET_RANGE_AXIS1) "' max='" STR(HOME_OFFSET_RANGE_AXIS1) "'>&nbsp;" L_HOME_OFFSET_RANGE_AXIS1 "<br />\n";
 const char html_homeOffsetAxis2[] PROGMEM =
-  "<input style='width:6em;' value='%ld' type='number' name='hc2' min='-324000' max='324000'>&nbsp;" L_HOME_OFFSET_RANGE_AXIS2 "<br /><br />\n";
+  "<input style='width:6em;' value='%ld' type='number' name='hc2' min='-" STR(HOME_OFFSET_RANGE_AXIS2) "' max='" STR(HOME_OFFSET_RANGE_AXIS2) "'>&nbsp;" L_HOME_OFFSET_RANGE_AXIS2 "<br /><br />\n";
 
 #ifdef HOME_SWITCH_DIRECTION_CONTROL
   const char html_homeReverse[] PROGMEM =

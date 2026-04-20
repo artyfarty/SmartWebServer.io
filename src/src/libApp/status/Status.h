@@ -22,6 +22,8 @@ typedef struct Features {
     float value2;
     float value3;
     float value4;
+    float voltage;
+    float current;
 } features;
 
 #define PierSideNone     0
@@ -45,13 +47,14 @@ class Status {
     inline int  getVersionMinor() { return ver_min; }
     inline char getVersionPatch() { return ver_patch; }
 
-    bool getLastErrorMessage(char message[]);
+    bool getLastErrorMessage(char message[], size_t messageSize);
 
     char configName[40] = "";
 
+    bool ready = false;
     bool atHome = false;
     bool homing = false;
-    int hasHomeSense = false;
+    bool hasHomeSense = false;
     bool autoHome = false;
     bool waitingHome = false;
     bool pauseAtHome = false;

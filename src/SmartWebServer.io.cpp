@@ -37,7 +37,6 @@
 // Use Config.h to configure the SWS to your requirements
 
 #include "src/Common.h"
-NVS nv;
 
 #ifdef OTA_PRESENT
   #include <ArduinoOTA.h>
